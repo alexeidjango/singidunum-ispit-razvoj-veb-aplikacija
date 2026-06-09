@@ -6,45 +6,74 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='PaymentOrder',
+            name="PaymentOrder",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('recipient_full_name', models.CharField(max_length=255)),
-                ('recipient_address', models.TextField()),
-                ('bank_account', models.CharField(max_length=18)),
-                ('sender_name', models.CharField(max_length=255)),
-                ('sender_address', models.TextField(blank=True)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=12, validators=[django.core.validators.MinValueValidator(Decimal('0.01'))])),
-                ('currency', models.CharField(choices=[('RSD', 'RSD'), ('EUR', 'EUR'), ('USD', 'USD')], max_length=3)),
-                ('reference_model', models.CharField(blank=True, max_length=10)),
-                ('reference_number', models.CharField(blank=True, max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("recipient_full_name", models.CharField(max_length=255)),
+                ("recipient_address", models.TextField()),
+                ("bank_account", models.CharField(max_length=18)),
+                ("sender_name", models.CharField(max_length=255)),
+                ("sender_address", models.TextField(blank=True)),
+                (
+                    "amount",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=12,
+                        validators=[
+                            django.core.validators.MinValueValidator(Decimal("0.01"))
+                        ],
+                    ),
+                ),
+                (
+                    "currency",
+                    models.CharField(
+                        choices=[("RSD", "RSD"), ("EUR", "EUR"), ("USD", "USD")],
+                        max_length=3,
+                    ),
+                ),
+                ("reference_model", models.CharField(blank=True, max_length=10)),
+                ("reference_number", models.CharField(blank=True, max_length=50)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='SavedRecipient',
+            name="SavedRecipient",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('recipient_full_name', models.CharField(max_length=255)),
-                ('recipient_address', models.TextField()),
-                ('bank_account', models.CharField(max_length=18)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("recipient_full_name", models.CharField(max_length=255)),
+                ("recipient_address", models.TextField()),
+                ("bank_account", models.CharField(max_length=18)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

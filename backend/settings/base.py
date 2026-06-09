@@ -7,11 +7,9 @@ SECRET_KEY = "django-insecure-change-me-in-production"
 
 DEBUG = True
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS: list[str] = ['*']
 
 INSTALLED_APPS = [
-    # users is listed before django.contrib.auth so its createsuperuser command overrides the built-in one
-    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -20,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_extensions",
+    "users",
     "payments",
     "api.v1.apps.ApiV1Config",
 ]

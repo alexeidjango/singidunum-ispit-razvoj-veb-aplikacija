@@ -1,3 +1,4 @@
+from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
@@ -10,6 +11,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     address = models.TextField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
+    objects = BaseUserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["full_name", "address"]
