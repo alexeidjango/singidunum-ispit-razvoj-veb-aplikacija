@@ -3,8 +3,6 @@ from django.db import models
 
 from core.models import TimeStampedModel
 
-from .managers import UserManager
-
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     email = models.EmailField(unique=True)
@@ -12,8 +10,6 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     address = models.TextField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
-    objects = UserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["full_name", "address"]

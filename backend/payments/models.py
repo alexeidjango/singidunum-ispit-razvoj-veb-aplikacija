@@ -1,10 +1,10 @@
 from decimal import Decimal
 
-from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 
 from core.models import TimeStampedModel
+from users.models import User
 
 from .choices import Currency
 from .validators import normalize_serbian_bank_account
@@ -26,9 +26,7 @@ class RecipientDataBase(TimeStampedModel):
 
 class SavedRecipient(RecipientDataBase):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="saved_recipients",
+        User, on_delete=models.CASCADE, related_name="saved_recipients"
     )
 
     def __str__(self) -> str:
@@ -37,12 +35,12 @@ class SavedRecipient(RecipientDataBase):
 
 class PaymentOrder(RecipientDataBase):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name="payment_orders",
     )
     sender_name = models.CharField(max_length=255)
-    sender_address = models.TextField()
+    sender_address = models.TextField(blank=True)
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=2,

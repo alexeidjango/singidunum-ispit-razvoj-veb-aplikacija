@@ -23,6 +23,8 @@ def create_or_update_user_object(
     full_name: Optional[str] = None,
     address: Optional[str] = None,
     password: Optional[str] = None,
+    is_staff: Optional[bool] = None,
+    is_superuser: Optional[bool] = None,
 ) -> User:
     user = user or User()
     if email is not None:
@@ -33,6 +35,10 @@ def create_or_update_user_object(
         user.address = address
     if password is not None:
         user.set_password(password)
+    if is_staff is not None:
+        user.is_staff = is_staff
+    if is_superuser is not None:
+        user.is_superuser = is_superuser
     user.full_clean()
     user.save()
     return user

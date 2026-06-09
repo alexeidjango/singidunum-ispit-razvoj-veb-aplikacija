@@ -18,12 +18,16 @@ def normalize_serbian_bank_account(value: str) -> str:
         bank_code, account_number, control_number = (part.strip() for part in parts)
     elif len(raw) == FULL_LENGTH:
         bank_code = raw[:BANK_CODE_LENGTH]
-        account_number = raw[BANK_CODE_LENGTH:BANK_CODE_LENGTH + ACCOUNT_NUMBER_LENGTH]
+        account_number = raw[
+            BANK_CODE_LENGTH : BANK_CODE_LENGTH + ACCOUNT_NUMBER_LENGTH
+        ]
         control_number = raw[-CONTROL_NUMBER_LENGTH:]
     else:
         raise ValidationError("Invalid bank account format.")
 
-    if not (bank_code.isdigit() and account_number.isdigit() and control_number.isdigit()):
+    if not (
+        bank_code.isdigit() and account_number.isdigit() and control_number.isdigit()
+    ):
         raise ValidationError("Bank account must contain digits only.")
 
     if len(bank_code) != BANK_CODE_LENGTH:
