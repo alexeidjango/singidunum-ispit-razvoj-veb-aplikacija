@@ -1,4 +1,4 @@
-from __future__ import annotations
+from typing import Optional
 
 from django.core.exceptions import ValidationError
 from django.db import transaction
@@ -18,11 +18,11 @@ def list_all_user_objects() -> QuerySet[User]:
 @transaction.atomic
 def create_or_update_user_object(
     *,
-    user: User | None = None,
-    email: str | None = None,
-    full_name: str | None = None,
-    address: str | None = None,
-    password: str | None = None,
+    user: Optional[User] = None,
+    email: Optional[str] = None,
+    full_name: Optional[str] = None,
+    address: Optional[str] = None,
+    password: Optional[str] = None,
 ) -> User:
     user = user or User()
     if email is not None:
@@ -60,8 +60,8 @@ def change_user_password(*, user: User, old_password: str, new_password: str) ->
 def update_user_profile(
     *,
     user: User,
-    full_name: str | None = None,
-    address: str | None = None,
+    full_name: Optional[str] = None,
+    address: Optional[str] = None,
 ) -> User:
     return create_or_update_user_object(
         user=user,

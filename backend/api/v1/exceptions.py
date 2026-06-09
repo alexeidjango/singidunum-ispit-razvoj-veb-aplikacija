@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from django.core.exceptions import ValidationError as DjangoValidationError
 from rest_framework import exceptions
 from rest_framework.views import exception_handler as drf_exception_handler

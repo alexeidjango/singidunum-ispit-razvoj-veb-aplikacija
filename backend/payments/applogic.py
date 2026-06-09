@@ -1,6 +1,5 @@
-from __future__ import annotations
-
 from decimal import Decimal
+from typing import Optional
 
 from django.db import transaction
 from django.db.models import QuerySet
@@ -22,10 +21,10 @@ def get_saved_recipient_object(*, user: User, recipient_id: int) -> SavedRecipie
 def create_or_update_saved_recipient_object(
     *,
     user: User,
-    recipient: SavedRecipient | None = None,
-    recipient_full_name: str | None = None,
-    recipient_address: str | None = None,
-    bank_account: str | None = None,
+    recipient: Optional[SavedRecipient] = None,
+    recipient_full_name: Optional[str] = None,
+    recipient_address: Optional[str] = None,
+    bank_account: Optional[str] = None,
 ) -> SavedRecipient:
     recipient = recipient or SavedRecipient(user=user)
     if recipient_full_name is not None:
@@ -51,16 +50,16 @@ def get_payment_order_object(*, user: User, payment_order_id: int) -> PaymentOrd
 def create_or_update_payment_order_object(
     *,
     user: User,
-    payment_order: PaymentOrder | None = None,
-    recipient_full_name: str | None = None,
-    recipient_address: str | None = None,
-    bank_account: str | None = None,
-    sender_name: str | None = None,
-    sender_address: str | None = None,
-    amount: Decimal | None = None,
-    currency: str | None = None,
-    reference_model: str | None = None,
-    reference_number: str | None = None,
+    payment_order: Optional[PaymentOrder] = None,
+    recipient_full_name: Optional[str] = None,
+    recipient_address: Optional[str] = None,
+    bank_account: Optional[str] = None,
+    sender_name: Optional[str] = None,
+    sender_address: Optional[str] = None,
+    amount: Optional[Decimal] = None,
+    currency: Optional[str] = None,
+    reference_model: Optional[str] = None,
+    reference_number: Optional[str] = None,
 ) -> PaymentOrder:
     payment_order = payment_order or PaymentOrder(user=user)
     if recipient_full_name is not None:
