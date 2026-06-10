@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import useAxios from "axios-hooks";
@@ -12,8 +12,10 @@ import { formatBankAccount } from "../utils/bankAccount";
 
 const SavedRecipientListPage = () => {
   const navigate = useNavigate();
-  const [{ data, loading, error }, refetch] =
-    useAxios<SavedRecipient[]>(SAVED_RECIPIENTS);
+  const [{ data, loading, error }, refetch] = useAxios<SavedRecipient[]>(
+    SAVED_RECIPIENTS,
+    { useCache: false },
+  );
 
   const [deleteTarget, setDeleteTarget] = useState<SavedRecipient | null>(null);
   const [deletebusy, setDeleteBusy] = useState(false);
@@ -29,10 +31,6 @@ const SavedRecipientListPage = () => {
       setDeleteBusy(false);
     }
   };
-
-  useEffect(() => {
-    refetch();
-  }, []);
 
   if (loading) return <LoadingSpinner />;
   if (error)

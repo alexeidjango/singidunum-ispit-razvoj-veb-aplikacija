@@ -36,7 +36,7 @@ const PaymentOrderEditPage = () => {
   // Load existing order when editing
   const [{ data: existing, loading: loadingExisting }] = useAxios<PaymentOrder>(
     { url: isEdit ? byId(PAYMENT_ORDERS, id!) : "" },
-    { manual: !isEdit },
+    { manual: !isEdit, useCache: false },
   );
 
   // Load saved recipients for the picker

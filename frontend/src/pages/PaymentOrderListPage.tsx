@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import useAxios from "axios-hooks";
@@ -12,8 +12,10 @@ import { formatBankAccount } from "../utils/bankAccount";
 
 const PaymentOrderListPage = () => {
   const navigate = useNavigate();
-  const [{ data, loading, error }, refetch] =
-    useAxios<PaymentOrder[]>(PAYMENT_ORDERS);
+  const [{ data, loading, error }, refetch] = useAxios<PaymentOrder[]>(
+    PAYMENT_ORDERS,
+    { useCache: false },
+  );
 
   const [deleteTarget, setDeleteTarget] = useState<PaymentOrder | null>(null);
   const [deleteBusy, setDeleteBusy] = useState(false);
@@ -30,9 +32,9 @@ const PaymentOrderListPage = () => {
     }
   };
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  // useEffect(() => {
+  //   refetch();
+  // }, []);
 
   if (loading) return <LoadingSpinner />;
   if (error)
