@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import useAxios from "axios-hooks";
@@ -29,6 +29,10 @@ const SavedRecipientListPage = () => {
       setDeleteBusy(false);
     }
   };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (loading) return <LoadingSpinner />;
   if (error)

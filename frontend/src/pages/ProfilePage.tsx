@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // ── Account details form ────────────────────────────────────────────────
   const [profileError, setProfileError] = useState<string | null>(null);
   const {
     register: regProfile,
@@ -38,7 +37,11 @@ const ProfilePage = () => {
   const onProfileSubmit = async (values: ProfileFormValues) => {
     setProfileError(null);
     try {
-      await instance.patch(USERS_ME, values);
+      const result = await instance.patch(USERS_ME, values);
+      resetProfile({
+        full_name: result.data.full_name,
+        address: result.data.address,
+      });
       navigate("/history");
     } catch (err) {
       const msg = applyApiErrors(err, setProfileFieldError);
@@ -79,17 +82,9 @@ const ProfilePage = () => {
       {/* Account details */}
       <Card className="p-4 shadow-sm mb-4" style={{ maxWidth: 520 }}>
         <h5 className="mb-3">Lični podaci</h5>
+        <div className="mb-3">Email: {user?.email ?? ""}</div>
         <FormErrorAlert message={profileError} />
         <Form noValidate onSubmit={handleProfile(onProfileSubmit)}>
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={user?.email ?? ""}
-              readOnly
-              plaintext
-            />
-          </Form.Group>
           <TextField
             label="Ime i prezime"
             registration={regProfile("full_name")}
