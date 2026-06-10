@@ -12,7 +12,7 @@ Backend deo omogućava REST API za registraciju-autorizaciju, promenu korisničk
 
 REST API je napravljen standardnim sredstvima DRFa.
 
-Detaljnije o API.
+[Detaljnije o API](backend/README.md).
 
 ## Frontend
 
@@ -22,24 +22,40 @@ Frontend/side validacija je samo udobstvo da se izbegne backend poziv, konačna 
 
 Autorizacioni tokeni se čuvaju u localStorage-u, što definitivno nije najbolja praksa. Takav sam izbor napravio s obzirom da je ovo apsolutno školski projekat koji se nikad neće koristiti u prodakšenu.
 
-S obzirom na to da posle registracije bekend ne vraća token, tokom registracije uneseni korisnički podaci (login i lozinka) se posle uspešne registracije ponovo koriste za login, tako da posle uspešne registracije 
+S obzirom na to da posle registracije bekend ne vraća token, tokom registracije uneseni korisnički podaci (login i lozinka) se posle uspešne registracije ponovo koriste za login.
+
+Odjava se vrši samo brisanjem tokena.
 
 UI uglavnom ne koristi ikakav custom CSS (uglavnom se koriste bootstrap'ovi stilovi), osim stilova za štampanje uplatnice.
 
-## Slike projekta / flow
+## Snimci ekrana
 
-### Ekran registracije
+### Prijava i registracija
 
-![screenshot](images/screenshot.png)
+![screenshot](images/registracija.png)
+
+![screenshot](images/prijava.png)
 
 ### Lista primaoca plaćanja
 
+![screenshot](images/lista_primaoca.png)
+
 ### Dodavanje primaoca plaćanja
+
+![screenshot](images/novi_primalac.png)
 
 ### Lista uplatnica
 
+![screenshot](images/lista_uplatnica.png)
+
 ### Dodavanje uplatnice
+
+![screenshot](images/nova_uplatnica.png)
 
 ### Ekran štampanja uplatnice
 
+![screenshot](images/stampa.png)
+
 ### Podešavanja profila
+
+![screenshot](images/profil.png)
