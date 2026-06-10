@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from core.models import TimeStampedModel
@@ -20,7 +21,10 @@ class RecipientDataBase(TimeStampedModel):
 
     def full_clean(self, *args, **kwargs) -> None:
         if self.bank_account:
-            self.bank_account = normalize_serbian_bank_account(self.bank_account)
+            try:
+                self.bank_account = normalize_serbian_bank_account(self.bank_account)
+            except ValidationError as e:
+                raise ValidationError({"bank_account": e.messages}) from e
         return super().full_clean(*args, **kwargs)
 
 
