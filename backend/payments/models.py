@@ -44,15 +44,18 @@ class PaymentOrder(RecipientDataBase):
         related_name="payment_orders",
     )
     sender_name = models.CharField(max_length=255)
-    sender_address = models.TextField(blank=True)
+    sender_address = models.TextField(blank=True, default="")
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=2,
         validators=[MinValueValidator(Decimal("0.01"))],
     )
     currency = models.CharField(max_length=3, choices=Currency.choices)
-    reference_model = models.CharField(max_length=10, blank=True)
-    reference_number = models.CharField(max_length=50, blank=True)
+    reference_model = models.CharField(max_length=10, blank=True, default="")
+    reference_number = models.CharField(max_length=50, blank=True, default="")
+
+    payment_purpose = models.CharField(max_length=255, blank=True, default="")
+    payment_code = models.CharField(max_length=255, blank=True, default="")
 
     def __str__(self) -> str:
         return f"{self.recipient_full_name} - {self.amount} {self.currency}"

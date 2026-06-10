@@ -35,6 +35,8 @@ class PaymentOrderSerializer(serializers.ModelSerializer):
             "currency",
             "reference_model",
             "reference_number",
+            "payment_purpose",
+            "payment_code",
             "created_at",
             "updated_at",
         )

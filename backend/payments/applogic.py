@@ -60,6 +60,8 @@ def create_or_update_payment_order_object(
     currency: Optional[str] = None,
     reference_model: Optional[str] = None,
     reference_number: Optional[str] = None,
+    payment_purpose: Optional[str] = None,
+    payment_code: Optional[str] = None,
 ) -> PaymentOrder:
     payment_order = payment_order or PaymentOrder(user=user)
     if recipient_full_name is not None:
@@ -80,6 +82,10 @@ def create_or_update_payment_order_object(
         payment_order.reference_model = reference_model
     if reference_number is not None:
         payment_order.reference_number = reference_number
+    if payment_purpose is not None:
+        payment_order.payment_purpose = payment_purpose
+    if payment_code is not None:
+        payment_order.payment_code = payment_code
     payment_order.full_clean()
     payment_order.save()
     return payment_order
