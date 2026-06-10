@@ -1,3 +1,51 @@
 @media print {
-  /* slip rules — finalized in Step 8 */
+  /* Hide everything except the slip */
+  .d-print-none,
+  .navbar,
+  button,
+  .btn {
+    display: none !important;
+  }
+
+  /* Reset page margins */
+  @page {
+    margin: 10mm;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  /* Ensure the slip fills the page cleanly */
+  .payment-slip {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .payment-slip .border-end {
+    border-right: 1px solid #000 !important;
+  }
+
+  /* Make form controls look like plain text when printed */
+  .payment-slip input,
+  .payment-slip select {
+    border: none !important;
+    border-bottom: 1px solid #999 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-size: 11pt;
+  }
+
+  .payment-slip label {
+    font-size: 8pt;
+    color: #555;
+    margin-bottom: 0;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
 }
