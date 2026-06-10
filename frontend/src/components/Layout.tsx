@@ -1,11 +1,14 @@
-import { NavBar } from "./NavBar.tsx";
-import type { PropsWithChildren } from "react";
+import { Outlet } from "react-router";
+import { Container } from "react-bootstrap";
+import { NavBar } from "./NavBar";
 
-export const Layout = ({ children }: PropsWithChildren) => {
+export const Layout = () => {
   return (
     <>
       <NavBar />
-      {children}
+      <Container className="py-4">
+        <Outlet />
+      </Container>
     </>
   );
 };
