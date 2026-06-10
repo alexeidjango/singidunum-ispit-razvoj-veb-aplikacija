@@ -1,47 +1,16 @@
-@media print {
-  /* Hide everything except the slip */
-  .d-print-none,
-  .navbar,
-  button,
-  .btn {
-    display: none !important;
-  }
+/* App-wide print resets. Slip styling lives in
+   src/components/PaymentSlipPrint.module.css (locally scoped).
+   Chrome (navbar, buttons, editable form, recipient picker) is hidden on
+   print via Bootstrap's `d-print-none` utility. */
 
-  /* Reset page margins */
+@media print {
   @page {
     margin: 10mm;
   }
 
   body {
     background: white !important;
-  }
-
-  /* Ensure the slip fills the page cleanly */
-  .payment-slip {
-    border: 1px solid #000 !important;
-    box-shadow: none !important;
-    page-break-inside: avoid;
-  }
-
-  .payment-slip .border-end {
-    border-right: 1px solid #000 !important;
-  }
-
-  /* Make form controls look like plain text when printed */
-  .payment-slip input,
-  .payment-slip select {
-    border: none !important;
-    border-bottom: 1px solid #999 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    font-size: 11pt;
-  }
-
-  .payment-slip label {
-    font-size: 8pt;
-    color: #555;
-    margin-bottom: 0;
+    font-family: "Arial", "Helvetica Neue", sans-serif;
   }
 
   .container {

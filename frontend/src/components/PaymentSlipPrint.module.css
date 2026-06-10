@@ -1,0 +1,109 @@
+/* Printable payment-order slip — locally scoped (CSS Module).
+   Hidden on screen; rendered only when printing. */
+
+.root {
+  display: none;
+}
+
+@media print {
+  .root {
+    display: block;
+  }
+
+  /* ── Slip outer frame ───────────────────────────────────────────────── */
+  .outer {
+    border: 2px solid #000;
+    padding: 12px 16px;
+    position: relative;
+    page-break-inside: avoid;
+  }
+
+  .title {
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  /* ── Two-column body ────────────────────────────────────────────────── */
+  .body {
+    display: flex;
+    gap: 24px;
+  }
+
+  .left {
+    flex: 0 0 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  /* ── Field: label + box ─────────────────────────────────────────────── */
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .label {
+    font-size: 7pt;
+    color: #333;
+    margin-bottom: 2px;
+  }
+
+  .box {
+    border: 1px solid #000;
+    min-height: 24px;
+    padding: 2px 4px;
+    font-size: 10pt;
+    line-height: 1.3;
+  }
+
+  .boxTall {
+    min-height: 48px;
+  }
+
+  /* ── Row layouts in the right column ────────────────────────────────── */
+  .rowTop,
+  .rowBottom {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+  }
+
+  .fieldSm {
+    flex: 0 0 70px;
+  }
+
+  .fieldGrow {
+    flex: 1;
+  }
+
+  /* ── Footer: signature / date lines ─────────────────────────────────── */
+  .footerLeft {
+    margin-top: 16px;
+  }
+
+  .footerRight {
+    display: flex;
+    gap: 24px;
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .footerCol {
+    flex: 1;
+  }
+
+  .underline {
+    border-bottom: 1px solid #000;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+}

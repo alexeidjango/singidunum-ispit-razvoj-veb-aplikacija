@@ -19,6 +19,7 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { applyApiErrors } from "../api/errors";
 import { toAmountString, parseAmount } from "../utils/amount";
 import { useAuth } from "../auth/useAuth";
+import PaymentSlipPrint from "../components/PaymentSlipPrint";
 
 const CURRENCY_OPTIONS = [
   { value: "RSD", label: "RSD" },
@@ -48,6 +49,7 @@ const PaymentOrderEditPage = () => {
     reset,
     setValue,
     setError,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<PaymentOrderFormValues>({
     resolver: yupResolver(paymentOrderSchema),
@@ -82,6 +84,9 @@ const PaymentOrderEditPage = () => {
     setValue("recipient_address", r.recipient_address);
     setValue("bank_account", r.bank_account);
   };
+
+  // Live form values for the printable slip
+  const v = watch();
 
   const onSubmit = async (values: PaymentOrderFormValues) => {
     setFormError(null);
@@ -127,7 +132,7 @@ const PaymentOrderEditPage = () => {
         </div>
 
         {/* Payment slip card */}
-        <Card className="payment-slip border-dark mb-4">
+        <Card className="payment-slip-form border-dark mb-4 d-print-none">
           <Card.Body>
             <Row>
               {/* Left column — uplatilac + primalac */}
@@ -228,6 +233,8 @@ const PaymentOrderEditPage = () => {
             </Row>
           </Card.Body>
         </Card>
+
+        <PaymentSlipPrint values={v} />
 
         {/* Action buttons — hidden on print */}
         <div className="d-flex gap-2 d-print-none">
